@@ -1,23 +1,52 @@
 "use client";
-import React from 'react';
+
+import { ChatCompletionRequestMessage } from "openai";
+import axios from "axios";
+import React, { useState } from 'react';
 import * as z from "zod";
 import { Heading } from "@/components/heading";
 import { MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
-
 import { formSchema } from "./constants";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { useRouter } from "next/navigation";
+import { ChatCompletion } from "openai/resources/index.mjs";
 
 const Konusma = () => {
-  const { register, handleSubmit } = useForm<z.infer<typeof formSchema>>({
+  const router = useRouter();
+  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: ""
     }
-  });
+  })
+
+  const isLoading = form.formState.isSubmitting;
+
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      const userMessage: ChatCompletionRequestMessage = {
+        role: "user",
+        content: values.prompt,
+      };
+      const newMessages = [...messages, userMessage];
+    
+      const response = await axios.post('/api/konusma', { messages: newMessages });
+
+      setMessages((current) => [...current, userMessage, response.data]);
+      form.reset();
+    } catch ( error: any) {
+    //TODO: Open Pro Modal  
+      console.log(error);
+    } finally {
+      router.refresh();
+
+    } 
   };
 
   return (
@@ -31,21 +60,47 @@ const Konusma = () => {
       />
 
       <div className="px-4 lg:px-8">
-        <form onSubmit={handleSubmit(onSubmit)} className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2">
-          <div className="col-span-12 lg:col-span-10">
-            <input {...register('prompt')} className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
-            placeholder='En etkileyici sunumlar ortalama kaç dakika?'/>
+        <div>
+          <Form {...form}>
+            <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='rounded=lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2 '>
+              <FormField 
+              name="prompt"
+              render={({ field }) => (
+                <FormItem className='col-span-12 lg:col-span-10'>
+                  <FormControl className='m-0 p-0'>
+                    <Input 
+                    className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent'
+                    disabled={isLoading}
+                    placeholder='En etkileyici sunumların süresi ortalama kaç dakikadır ve kaç sayfadan oluşmalıdır?
+                    '{...field}
+                    />
+
+                  </FormControl>
+                </FormItem>
+              )}
+              />
+              <Button className='col-span-12 lg:col-span-2 w-full' disabled={isLoading}>
+                Üret
+              </Button>
+            </form>
+
+          </Form>
+        </div>
+        <div className='space-y-4 mt-4'>
+      <div className="flex flex-col-reverse gap-y-4">
+        {messages.map((message) => (
+          <div key={message.content}>
+            {message.content}
           </div>
-          <div className="col-span-12">
-            <button type="submit" className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-              Gönder
-            </button>
-          </div>
-        </form>
+        ))}
       </div>
-      <div className='space-y-4 mt-4'>
-      Message content
       </div>
+       
+        
+      </div>
+      
     </div>
   );
 };

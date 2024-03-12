@@ -1,1 +1,1 @@
-shadcn/ui, next.js, clerk.auth, 
+shadcn/ui [form, input, icons ], next.js, clerk.auth, openai, axios, 
