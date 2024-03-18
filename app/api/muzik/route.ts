@@ -1,42 +1,48 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
+import { v2 } from "@google-cloud/translate";
+
+const translate = new v2.Translate({ projectId: 'fine-command-417618', keyFilename: 'service_account.json' });
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN!
 });
 
-
-export async function POST(
-  req: Request
-) {
+export async function POST(req: Request) {
   try {
     const { userId } = auth();
     const body = await req.json();
     const { prompt } = body;
-  
 
-    // kullanici girisi var mi yok mu 
-    if(!userId){
-      return new NextResponse("Bulunamadı", { status: 401});
+    // Kullanıcı girişi var mı yok mu kontrol et
+    if (!userId) {
+      return new NextResponse("Bulunamadı", { status: 401 });
     }
 
-    if (!prompt){
-      return new NextResponse("Prompt Gerekli!", { status: 400});
+    if (!prompt) {
+      return new NextResponse("Prompt Gerekli!", { status: 400 });
     }
 
-    const response = await replicate.run(
-      "riffusion/riffusion:8cf61ea6c56afd61d8f5b9ffd14d7c216c0a93844ce2d82ac1c9ecc9c7f24e05",
-      {
-        input: {
-          prompt_a: prompt,
-        }
-      }
+    // Prompt'u İngilizce'ye çevir
+    const [translations] = await translate.translate(prompt, 'en');
+    const translatedPrompt = Array.isArray(translations) ? translations[0] : translations;
+    
+    console.log(translatedPrompt)
+
+    //Replicate API'ye istek gönder
+     const response = await replicate.run(
+       "riffusion/riffusion:8cf61ea6c56afd61d8f5b9ffd14d7c216c0a93844ce2d82ac1c9ecc9c7f24e05",
+       {
+         input: {
+           prompt_a: translatedPrompt
+         }
+       }
     );
-return NextResponse.json(response);
-  } 
-  catch (error) {
-    console.log("MUSIC_ERROR",error);
-    return new NextResponse("Sistem Hatası", { status: 500});
+
+    return NextResponse.json("Ceviri basarili", {status:200});
+  } catch (error) {
+    console.log("MUSIC_ERROR", error);
+    return new NextResponse("Sistem Hatası", { status: 500 });
   }
 }

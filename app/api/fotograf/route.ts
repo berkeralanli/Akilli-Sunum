@@ -1,6 +1,9 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import OpenAI from "openai"
+import { v2 } from "@google-cloud/translate";
+
+const translate = new v2.Translate({ projectId: 'fine-command-417618', keyFilename: 'service_account.json' });
 
 const openai = new OpenAI ({
   apiKey: process.env.OPENAI_API_KEY
@@ -33,10 +36,13 @@ export async function POST(
     if (!resolution){
       return new NextResponse("Çözünürlük Gerekli!", { status: 400});
     }
+    const [translations] = await translate.translate(prompt, 'en');
+    const translatedPrompt = Array.isArray(translations) ? translations[0] : translations;
+
 // openai image generator dall-e-3 
     const response = await openai.images.generate({
-      model:"dall-e-3",
-      prompt:prompt,
+      model:"dall-e-2",
+      prompt:translatedPrompt,
       n: parseInt(amount, 10),
       size: resolution
       });
