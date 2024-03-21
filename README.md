@@ -1,2 +1,6 @@
 shadcn/ui [form, input, icons ], next.js, clerk.auth, openai, axios(CRUD)
 replicate.ai/riffusion (muzik icin)
+neon DB
+drizzle-orm ( typescript nosql )
+
+w-screen min-h-screen bg-gradient-to-b from-gray-50 via-gray-200 to-gray-600
