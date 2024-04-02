@@ -35,9 +35,9 @@ const routes =[
     color: "text-pink-700",
   },
   {
-    label: "Video",
+    label: "Gif",
     icon: VideoIcon,
-    href: "/video",
+    href: "/gif",
     color: "text-orange-700",
   },
   {

@@ -40,7 +40,7 @@ export async function POST(req: Request) {
        }
     );
 
-    return NextResponse.json("Ceviri basarili", {status:200});
+    return NextResponse.json(response);
   } catch (error) {
     console.log("MUSIC_ERROR", error);
     return new NextResponse("Sistem Hatası", { status: 500 });

@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 const FileUpload = () => {
   const router = useRouter()
   const [uploading, setUploading] = React.useState(false);
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading} = useMutation({
     mutationFn: async ({
       file_key,
       file_name,
@@ -49,10 +49,10 @@ const FileUpload = () => {
         mutate(data, {
           onSuccess: ({chat_id}) => {
             toast.success("Yükleme başarılı!");
-            router.push(`chat/${chat_id}`);
+            router.push(`/chat/${chat_id}`);
           },
           onError: (err) => {
-            toast.error("Chat oluşturulurken hata oluştu");
+            toast.error("Sohbet oluşturulurken hata oluştu");
           }
         })
        

@@ -34,7 +34,7 @@ const Video = () => {
     try {
      setVideo(undefined);
     
-      const response = await axios.post('/api/video', values);
+      const response = await axios.post('/api/gif', values);
 
       setVideo(response.data[0]);
       form.reset();
@@ -50,8 +50,8 @@ const Video = () => {
   return (
     <div>
       <Heading
-        title="Video Üretme"
-        description="Promptunuzu videoya dönüştürün."
+        title="Gif Üretme"
+        description="Promptunuzu gife dönüştürün."
         icon={VideoIcon}
         iconColor="text-orange-700"
         bgColor="bg-orange-700/10"
@@ -71,7 +71,7 @@ const Video = () => {
                     <Input 
                     className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent'
                     disabled={isLoading}
-                    placeholder='Mercanların arasında yüzen sarı bir balık videosu
+                    placeholder='Mercanların arasında yüzen sarı bir balık gifi
                     '{...field}
                     />
 

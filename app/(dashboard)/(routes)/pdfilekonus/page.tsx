@@ -1,13 +1,24 @@
 import FileUpload from "@/components/FileUpload";
 import Providers from "@/components/Provider";
 import { Button } from "@/components/ui/button";
+import { db } from "@/lib/db";
+import { chats } from "@/lib/db/schema";
 import { UserButton, auth } from "@clerk/nextjs";
+import { eq } from "drizzle-orm";
+import { ArrowBigUp } from "lucide-react";
+import Link from "next/link";
 import { Toaster } from "react-hot-toast";
 
 export default async function Home() {
   const { userId } = await auth();
   const isAuth = !!userId;
-
+  let firstChat;
+  if (userId) {
+    firstChat = await db.select().from(chats).where(eq(chats.userId, userId));
+    if (firstChat) {
+      firstChat = firstChat[0];
+    }
+  }
   return (
     <Providers>
     <div className="px-4 lg:px-16 flex justify-center items-center h-screen">
@@ -16,9 +27,19 @@ export default async function Home() {
           <h1 className="text-3xl lg:text-5xl font-semibold mb-4">
             Herhangi bir pdf ile sohbet et
           </h1>
-          <div className="flex justify-center items-center mb-4">
+          <div className="flex justify-center items-center mb-2">
           </div>
-          <Button className="w-full md:w-auto">Sohbete Git</Button>
+          <div className="flex justify-center items-center">
+            {isAuth && firstChat && (
+              <>
+                <Link href={`/chat/${firstChat.id}`}>
+                  <Button >
+                    Sohbete Git
+                  </Button>
+                </Link>
+                </>
+            )}
+            </div>
         </div>
         <p className="text-center max-w-md mx-auto mt-4">
           Yapay zeka ile pdfinize soru sorun, hızlı ve net cevaplar alın.
