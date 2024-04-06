@@ -1,10 +1,13 @@
-shadcn/ui [form, input, icons ], next.js, clerk.auth, openai, axios(CRUD)
-replicate.ai/riffusion (muzik icin)
-neon DB
-
-drizzle-orm ( typescript nosql )
-Bulut Depolama için Amazon Web Service AWS kullanıyor
-Pinecone DB pdf i okunabilir metinler halinde parçalamak için
-Vercel AI SDK  - Ai sohbet icin
-# AkilliSunum
-# Akilli-Sunum
+Shadcn/ui [form, input, icons ], 
+Next.js, 
+Clerk.auth, 
+Openai, 
+Axios(CRUD) 
+Replicate.ai/riffusion (muzik icin) 
+Replicate.ai/anotherjesse/zeroscope-v2 (video icin)
+Neon DB
+Drizzle-orm ( typescript nosql )
+Amazon Web Service AWS -Bulut Depolama için 
+Pinecone DB pdf i okunabilir metinler halinde parçalamak için 
+Vercel AI SDK - Ai sohbet icin
+Spline 3D design
