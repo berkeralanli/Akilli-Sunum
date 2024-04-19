@@ -14,7 +14,7 @@ export const Empty = ({
         <Image 
         alt="Empty"
         fill
-        src="/empty.png"/>
+        src="/empty.svg"/>
 
       </div>
       <p className="text-muted-foreground text-sm text-center">

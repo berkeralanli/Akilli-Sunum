@@ -70,7 +70,7 @@ const Sidebar = () => {
             <Image
             fill
             alt="Logo"
-            src="/logo2.png"/>
+            src="/logo.svg"/>
           </div>
           <h1 className={cn ("text-2xl font-bold", montserrat.className)}>
             Akıllı Sunum

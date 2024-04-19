@@ -1,4 +1,4 @@
-import { LandingHero2 } from "@/components/LandingHero2";
+import { LandingHero } from "@/components/LandingHero";
 import { LandingNavbar } from "@/components/LandingNavbar";
 import { LandingContent } from "@/components/LandingContent";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ const LandingPage = () => {
 return (
   <div className="w-full h-full">
     <LandingNavbar/>
-    <LandingHero2/>
+    <LandingHero/>
     {/* <LandingContent /> */}
   </div>
   );

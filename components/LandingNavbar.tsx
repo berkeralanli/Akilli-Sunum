@@ -18,16 +18,16 @@ export const LandingNavbar = () => {
   
 
   return(
-    <nav className="p-4 bg-transparent flex items-center justify-between">
-      <Link href="/" className="flex items=center">
+    <nav className="pt-6 bg-transparent flex items-center justify-between">
+      <Link href="/" className="flex items-center p-4">
         <div className="relative h-8 w-8 mr-4">
           <Image
           fill
           alt="logo"
-          src={"/logo2.png"}
+          src={"/logo.svg"}
           />
         </div>
-        <h1 className={cn("text=2xl font-bold text-zinc-600 mt-1", font.className)}>
+        <h1 className={cn("text=2xl font-bold text-white mt-1", font.className)}>
         Akıllı Sunum        
         </h1>
       </Link>

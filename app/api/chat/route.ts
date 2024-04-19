@@ -1,28 +1,28 @@
-import {Configuration, OpenAIApi} from 'openai-edge'
-import { OpenAIStream, StreamingTextResponse} from 'ai'
+import { Configuration, OpenAIApi } from 'openai-edge';
+import { OpenAIStream, StreamingTextResponse } from 'ai';
 import { getContext } from '@/lib/context';
 import { db } from '@/lib/db';
-import { chats, messages as _messages} from '@/lib/db/schema';
+import { chats, messages as _messages } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 import { Message } from 'ai/react';
 
 export const runtime = "edge";
 
-const config  = new Configuration({
+const config = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(config)
+});
+const openai = new OpenAIApi(config);
 
-export async function POST(req: Request){
-  try{
-    const { messages, chatId} = await req.json();
+export async function POST(req: Request) {
+  try {
+    const { messages, chatId } = await req.json();
     const _chats = await db.select().from(chats).where(eq(chats.id, chatId));
-    if(_chats.length != 1){
-      return NextResponse.json({'error': 'Sohbet Bulunamadı'}, {status: 404})
+    if (_chats.length !== 1) {
+      return NextResponse.json({ 'error': 'Sohbet Bulunamadı' }, { status: 404 });
     }
-    const fileKey = _chats[0].fileKey
-    const lastMessage = messages[messages.length -1];
+    const fileKey = _chats[0].fileKey;
+    const lastMessage = messages[messages.length - 1];
     const context = await getContext(lastMessage.content, fileKey);
 
     const prompt = {
@@ -43,35 +43,40 @@ export async function POST(req: Request){
       `,
     };
 
+    const userMessages = messages.filter((message: Message) => message.role === "user");
+    const systemMessages = messages.filter((message: Message) => message.role === "system");
+    const sortedMessages = [...userMessages, ...systemMessages];
+
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
         prompt,
-        ...messages.filter((message: Message) => message.role === "user"),
+        ...sortedMessages,
       ],
       stream: true,
     });
     const stream = OpenAIStream(response, {
-      onStart: async ()=>{
-        //save user message into db
+      onStart: async () => {
+
+        const userMessage = sortedMessages[sortedMessages.length - 1];
         await db.insert(_messages).values({
           chatId,
-          content: lastMessage.content,
-          role:'user',
-        })
+          content: userMessage.content,
+          role: 'user',
+        });
       },
-      onCompletion: async (completion) =>{
-        //save ai message into db
+      onCompletion: async (completion) => {
+
         await db.insert(_messages).values({
           chatId,
-          content: lastMessage.content,
-          role:'system',
-        })
+          content: completion,
+          role: 'system',
+        });
       }
-    })
-    return new StreamingTextResponse(stream)
-  }catch(error){
+    });
+    return new StreamingTextResponse(stream);
+  } catch (error) {
     console.error("Error occurred:", error);
-    return NextResponse.json({'error': 'Internal Server Error'}, {status: 500});
+    return NextResponse.json({ 'error': error.message || 'Internal Server Error' }, { status: 500 });
   }
 }

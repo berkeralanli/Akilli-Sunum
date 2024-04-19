@@ -3,9 +3,8 @@ import Providers from "@/components/Provider";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { chats } from "@/lib/db/schema";
-import { UserButton, auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
-import { ArrowBigUp } from "lucide-react";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
 
@@ -47,6 +46,9 @@ export default async function Home() {
         </p>
         <div className="mt-6">
           <FileUpload />
+          <p className="text-center text-xs text-gray-400 max-w-md mx-auto mt-4 ">
+          Lütfen fotoğraf içermeyen metin bazlı PDF dosyalarını yükleyin. Teşekkürler!
+        </p>
         </div>
       </div>
       <Toaster/>

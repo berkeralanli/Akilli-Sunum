@@ -8,13 +8,12 @@ export const Loader = () => {
         <Image 
         alt="logo"
         fill
-        src="/logo2.png"
-        style={{color: "red"}}
+        src="/logo.svg"
         />
 
       </div>
       <p className="text-sm text-mute">
-        Akıllı-Sunum düşünüyor...
+      Hazır ol, senin için çalışmaya başladım bile! 🚀
       </p>
     </div>
   );

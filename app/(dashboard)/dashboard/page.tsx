@@ -21,11 +21,11 @@ const tools = [
     href: "/fotograf"
   },
   {
-    label: "Video",
+    label: "Gif",
     icon: VideoIcon,
     color: "text-orange-700",
     bgColor:"bg-orange-500/10",
-    href: "/video"
+    href: "/gif"
   },
   {
     label: "Müzik",
