@@ -11,14 +11,18 @@ export const LandingHero = () => {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className="flex justify-center pt-14">
-      {/* Sol tarafta metin içeriği ve diğer bileşenler */}
-      <div className="flex flex-col justify-center items-center w-1/2 p-10">
-        <div className="text-white font-bold text-center space-y-4">
+    <div className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* 3D görsel */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <Spline className="h-full w-full" scene="https://prod.spline.design/17zxtAjpSVCzymzp/scene.splinecode" />
+      </div>
+      {/* Metin içeriği */}
+      <div className="absolute z-10 flex flex-col justify-center items-center p-10 md:p-20 text-white">
+        <div className="text-center space-y-4">
           <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold">
             <h1>Yapay zeka ile zenginleştirilmiş sunumlar</h1>
             <div className="p-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-800">
-              <TypewriterComponent
+            <TypewriterComponent 
                 options={{
                   strings: [
                     "Sohbet Et",
@@ -28,7 +32,7 @@ export const LandingHero = () => {
                     "Pdf'e Soru Sor",
                   ],
                   autoStart: true,
-                  loop: true
+                  loop: true,
                 }}
               />
             </div>
@@ -44,12 +48,6 @@ export const LandingHero = () => {
           </div>
         </div>
       </div>
-      {/* Sağ tarafta 3D görseli */}
-      <div className="w-1/2">
-        <Spline className='w-full flex scale-[.25] sm:scale-[.35] lg:scale-[0.6] items-center justify-center md:justify-start' scene='https://prod.spline.design/BCirRoLOJ0wK4DGf/scene.splinecode' />
-      </div>
     </div>
   );
 };
-
-// https://prod.spline.design/E94oN5AvkggYksFP/scene.splinecode'
