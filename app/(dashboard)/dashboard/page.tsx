@@ -52,7 +52,7 @@ return (
       Yapay zeka ile zenginleştirilmiş, etkileyici sunumlar.
         </h2>
         <p className="text-muted-foreground font-light text-sm md:text-lg text-center">
-        Yapay Zekanın desteğiyle sunumlarınızı bir üst seviyeye taşıyın!
+        Yapay Zeka desteğiyle sunumlarınızı bir üst seviyeye taşıyın
         </p>
         </div>  
         <div className="px-4 md:px-20 lg:px-32 space-y-4">
