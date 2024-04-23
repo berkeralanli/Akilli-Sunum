@@ -2,7 +2,7 @@ import { SignIn } from "@clerk/nextjs";
 import type { AppProps } from "next/app";
 
  
-function MyApp({ pageProps }: AppProps) {
+function MyApp({}: AppProps) {
   return (
     
       <SignIn
