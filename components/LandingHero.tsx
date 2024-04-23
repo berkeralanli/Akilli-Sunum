@@ -46,7 +46,7 @@ export const LandingHero = () => {
       </div>
       {/* Sağ tarafta 3D görseli */}
       <div className="w-1/2">
-        <Spline className='w-full flex scale-[.25] sm:scale-[.35] lg:scale-[0.6] items-center justify-center md:justify-start' scene='https://prod.spline.design/zDDWcDP2YcgQcRdF/scene.splinecode' />
+        <Spline className='w-full flex scale-[.25] sm:scale-[.35] lg:scale-[0.6] items-center justify-center md:justify-start' scene='https://prod.spline.design/BCirRoLOJ0wK4DGf/scene.splinecode' />
       </div>
     </div>
   );

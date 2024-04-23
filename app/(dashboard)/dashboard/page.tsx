@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ImageIcon, MessageSquare, Music2Icon, PaperclipIcon, Router, VideoIcon } from "lucide-react";
+import { ArrowRight, ImageIcon, MessageSquare, Music2Icon, PaperclipIcon, VideoIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const tools = [
@@ -52,7 +52,7 @@ return (
       Yapay zeka ile zenginleştirilmiş, etkileyici sunumlar.
         </h2>
         <p className="text-muted-foreground font-light text-sm md:text=lg text-center">
-        Yapay Zeka'nın desteğiyle sunumlarınızı bir üst seviyeye taşıyın!
+        Yapay Zekanın desteğiyle sunumlarınızı bir üst seviyeye taşıyın!
         </p>
         </div>  
         <div className="px-4 md:px-20 lg:px-32 space-y-4">
