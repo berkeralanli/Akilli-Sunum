@@ -99,7 +99,7 @@ const Video = () => {
           
       {video && (
         <video className="w-full aspect-video mt-8 rounded-lg border bg-black" controls>
-          <source src={video}/>
+          <source src={video[0]}/>
         </video>
       )}
       </div>
