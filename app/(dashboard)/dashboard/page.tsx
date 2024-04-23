@@ -51,7 +51,7 @@ return (
       <h2 className="text-2xl md:text-4xl font-bold text-center">
       Yapay zeka ile zenginleştirilmiş, etkileyici sunumlar.
         </h2>
-        <p className="text-muted-foreground font-light text-sm md:text=lg text-center">
+        <p className="text-muted-foreground font-light text-sm md:text-lg text-center">
         Yapay Zekanın desteğiyle sunumlarınızı bir üst seviyeye taşıyın!
         </p>
         </div>  
