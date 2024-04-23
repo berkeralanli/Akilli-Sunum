@@ -48,6 +48,7 @@ const DashboardPage = () => {
 return (
   <div>
     <div className="mb-8 space-y-4">
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
       <h2 className="text-2xl md:text-4xl font-bold text-center">
       Yapay zeka ile zenginleştirilmiş, etkileyici sunumlar.
         </h2>
