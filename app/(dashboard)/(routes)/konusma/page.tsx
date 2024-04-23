@@ -1,6 +1,6 @@
 "use client";
-
-import  ChatCompletionRequestMessage from "openai";
+// @ts-ignore
+import { ChatCompletionRequestMessage } from "openai";
 import axios from "axios";
 import React, { useState } from 'react';
 import * as z from "zod";
