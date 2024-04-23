@@ -1,5 +1,6 @@
 import { SignIn } from "@clerk/nextjs";
 import type { AppProps } from "next/app";
+/* eslint-disable react/no-unescaped-entities */
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,5 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     />
   );
 }
+
+/* eslint-enable react/no-unescaped-entities */
 
 export default MyApp;
