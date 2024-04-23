@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Pinecone } from "@pinecone-database/pinecone";
 import { convertToAscii } from "./db/utils";
 import { getEmbeddings } from "./db/embedding";

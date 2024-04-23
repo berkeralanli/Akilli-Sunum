@@ -1,5 +1,5 @@
 "use client"
-
+// @ts-ignore
 import { uploadToS3 } from '@/lib/s3';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
