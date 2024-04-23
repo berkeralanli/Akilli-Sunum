@@ -1,6 +1,4 @@
 "use client";
-
-
 import axios from "axios";
 import React, { useState } from 'react';
 import * as z from "zod";
@@ -99,7 +97,7 @@ const Muzik = () => {
           
       {music && (
         <audio controls className="w-full mt-8">
-          <source src={music}/>
+          <source src={music[0]}/>
         </audio>
       )}
       </div>
