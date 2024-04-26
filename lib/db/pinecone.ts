@@ -44,7 +44,7 @@ export async function loadS3IntoPinecone(fileKey: string){
   const pineconeIndex = await client.index("chatpdf");
   const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
 
-  console.log("inserting vectors into pinecone");
+  console.log('Vector pinecone a yukleniyor');
   await namespace.upsert(vectors);
 
   return documents[0];
@@ -53,7 +53,7 @@ export async function loadS3IntoPinecone(fileKey: string){
 
 async function embedDocument(doc: Document) {
   try {
-    const embeddings = await getEmbeddings(doc.pageContent);
+    const embeddings = await getEmbeddings(doc.pageContent); 
     const hash = md5(doc.pageContent);
 
     return {

@@ -97,11 +97,12 @@ const Video = () => {
             <Empty label="Henüz bir video oluşturulmadı"/>
           )}
           
-      {video && (
-        <video className="w-full aspect-video mt-8 rounded-lg border bg-black" controls>
-          <source src={video[0]}/>
-        </video>
-      )}
+          {video && (
+            <video className="w-full aspect-video mt-8 rounded-lg border bg-black" controls>
+              <source src={Array.isArray(video) ? video[0] : video} />
+            </video>
+          )}
+
       </div>
        
         

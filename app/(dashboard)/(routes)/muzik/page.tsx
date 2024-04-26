@@ -97,7 +97,7 @@ const Muzik = () => {
           
       {music && (
         <audio controls className="w-full mt-8">
-          <source src={music[0]}/>
+          <source src={Array.isArray(music) ? music[0] : music} />
         </audio>
       )}
       </div>
