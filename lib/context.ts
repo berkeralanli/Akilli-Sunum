@@ -34,7 +34,7 @@ export async function getContext(query: string, fileKey: string){
     pageNumber: Number
   }
 
-  let docs = qualifyingDocs.map((match) => (match.metadata as Metadata).text);
+  let docs = qualifyingDocs.map((match) => (match.metadata as unknown as Metadata).text);
   // 5 vectors
   return docs.join("\n").substring(0, 3000);
 }
