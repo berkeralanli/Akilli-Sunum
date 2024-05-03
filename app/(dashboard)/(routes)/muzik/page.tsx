@@ -101,8 +101,6 @@ const Muzik = () => {
         </audio>
       )}
       </div>
-       
-        
       </div>
       
     </div>
